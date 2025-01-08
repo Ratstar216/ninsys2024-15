@@ -8,7 +8,7 @@ def main():
     # テーブルの作成
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS books (
-            id INTEGER PRIMARY KEY,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL
         )
     ''')
