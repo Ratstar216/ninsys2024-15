@@ -20,7 +20,11 @@ def read_qr_from_camera():
         
         # pyzbar でデコード
         decoded_info = decode(frame)
-        print("decoded_info: ", decoded_info)
+        if len(decoded_info) != 0:
+            for info in decoded_info:
+                text = info.data.decode('utf-8')
+                print("read_qr_from_camera", text)
+                return text
         
         # フレーム上にデコードした結果を表示 (QR コードの位置と内容)
         for info in decoded_info:
@@ -29,7 +33,7 @@ def read_qr_from_camera():
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             # デコードした内容をフレーム上に描画
             text = info.data.decode('utf-8')
-            print(text)
+            print("text", text)
             cv2.putText(frame, text, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 
                         0.5, (0, 255, 0), 2)
         
