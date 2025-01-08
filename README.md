@@ -1,8 +1,9 @@
-requirements:
+# Requirements:
+- uv
+- pyzbar
 
-1. uv がインストールされている
-2. brew install pyzbar
-3. uv venv .venv
-4. uv run python src/*.py
-
-適当です
+# Usage
+1. uv sync
+2. uv run python src/test/create_dummy_data.py
+3. uv run python src/main.py
+  
