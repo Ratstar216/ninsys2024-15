@@ -9,6 +9,7 @@ def main():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS history (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
             book_id INTEGER NOT NULL,
             timestamp DATETIME NOT NULL,
             latitude REAL NOT NULL,
@@ -17,9 +18,9 @@ def main():
     ''')
 
     # データの挿入 (INSERT)
-    cursor.execute('INSERT INTO history (book_id, timestamp, latitude, longitude) VALUES (?, ?, ?, ?)', (2334, '2025-01-01 10:00:00', 35.6812, 139.7671))
-    cursor.execute('INSERT INTO history (book_id, timestamp, latitude, longitude) VALUES (?, ?, ?, ?)', (2558, '2025-01-02 10:00:00', 35.6895, 139.6917))
-    cursor.execute('INSERT INTO history (book_id, timestamp, latitude, longitude) VALUES (?, ?, ?, ?)', (2558, '2025-01-03 10:00:00', 35.7295, 139.7114))
+    cursor.execute('INSERT INTO history (user_id, book_id, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?)', (1234, 2334, '2025-01-01 10:00:00', 35.6812, 139.7671))
+    cursor.execute('INSERT INTO history (user_id, book_id, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?)', (1234, 2558, '2025-01-02 10:00:00', 35.6895, 139.6917))
+    cursor.execute('INSERT INTO history (user_id, book_id, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?)', (1999, 2558, '2025-01-03 10:00:00', 35.7295, 139.7114))
 
     # 変更を保存
     conn.commit()
