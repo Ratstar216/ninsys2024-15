@@ -10,7 +10,13 @@ def show_history(id):
     cursor = conn.cursor()
     
     cursor.execute('SELECT name FROM books WHERE id = ?', (id,))
-    book_name = cursor.fetchone()[0] 
+    res = cursor.fetchone()
+    if res is None:
+        print("The book is not registered.")
+        cursor.close()
+        conn.close()
+        return
+    book_name = res[0] 
 
     cursor.execute('''
         SELECT timestamp, latitude, longitude
