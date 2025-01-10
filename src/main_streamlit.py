@@ -28,7 +28,7 @@ def do_scan():
         st.session_state["user_scan_btn"] = True
     if st.session_state["user_scan_btn"]:
         # 実際にはカメラ等から取得する想定
-        user_id = int(read_qr_from_camera())
+        user_id = int(read_qr_from_camera("user_id_1"))
 
         cursor.execute('SELECT id, name FROM users WHERE id = ?', (user_id,))
         res = cursor.fetchone()
@@ -47,7 +47,7 @@ def do_scan():
         if book_scan_btn:
             st.session_state["book_scan_btn"] = True
         if st.session_state["book_scan_btn"]:
-            book_id = int(read_qr_from_camera())
+            book_id = int(read_qr_from_camera("book_id_1"))
 
             cursor.execute('SELECT id, name FROM books WHERE id = ?', (book_id,))
             res = cursor.fetchone()
@@ -61,8 +61,8 @@ def do_scan():
     # 3) DBへの履歴登録
     if user_id is not None and book_id is not None:
         st.write("Step 3: 履歴への登録")
-        st.write("User ID: {user_id}, User Name: {user_name}")
-        st.write("Book ID: {book_id}, Book Name: {book_name}")
+        st.write(f"User ID: {user_id}, User Name: {user_name}")
+        st.write(f"Book ID: {book_id}, Book Name: {book_name}")
         register_btn = st.button("履歴をDBに登録")
         if register_btn:
             st.session_state["register_btn"] = True
@@ -94,16 +94,17 @@ def do_show_history():
     """
     st.write("履歴を表示したい書籍のQRコードをスキャンしてください。")
     scan_book_btn = st.button("書籍QRコードをスキャン")
-    # if scan_book_btn:
-    # book_id = int(read_qr_from_camera())
-    book_id = 9999
-    st.write(f"Book ID: {book_id} をスキャンしました。")
-    # show_history(book_id) の戻り値や標準出力に依存する場合は
-    # 返り値をprintではなくreturnするように修正し、ここで受け取るなど対応が必要
-    print("book_id", book_id)
-    show_history(book_id)  # 標準出力している場合は、streamlit上で print 出力が見えないかもしれません
-    st.success(f"Book ID {book_id} の履歴を表示しました。")
-    print("show_history done")
+    if scan_book_btn:
+        st.session_state["scan_book_btn"] = True
+    if st.session_state["scan_book_btn"]:
+        book_id = int(read_qr_from_camera("book_id_2"))
+        st.write(f"Book ID: {book_id} をスキャンしました。")
+        # show_history(book_id) の戻り値や標準出力に依存する場合は
+        # 返り値をprintではなくreturnするように修正し、ここで受け取るなど対応が必要
+        print("book_id", book_id)
+        show_history(book_id)  # 標準出力している場合は、streamlit上で print 出力が見えないかもしれません
+        st.success(f"Book ID {book_id} の履歴を表示しました。")
+        print("show_history done")
 
 def do_register():
     """
@@ -133,6 +134,8 @@ def main():
         st.session_state["register_btn"] = False
     if "register_new_btn" not in st.session_state:
         st.session_state["register_new_btn"] = False
+    if "scan_book_btn" not in st.session_state:
+        st.session_state["scan_book_btn"] = False
 
 
     # モード選択をラジオボタンなどで実装

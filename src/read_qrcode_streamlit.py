@@ -4,7 +4,7 @@ from PIL import Image
 import io
 import time
 
-def read_qr_from_camera():
+def read_qr_from_camera(key):
     """
     Streamlit でカメラから撮影し、QRコードを解析して文字列を返す関数。
     QRコードが見つからなければ None を返す。
@@ -15,7 +15,7 @@ def read_qr_from_camera():
         st.session_state["qr_text"] = None
     
     # カメラから写真を撮影するためのウィジェット
-    picture = st.camera_input("QRコードをカメラに映して撮影してください")
+    picture = st.camera_input("QRコードをカメラに映して撮影してください", key=key)
     
     
     while picture is None:
@@ -53,4 +53,4 @@ def main():
         st.write("まだ QRコードを読み取っていません。")
 
 if __name__ == "__main__":
-    main()
+    main("main")
