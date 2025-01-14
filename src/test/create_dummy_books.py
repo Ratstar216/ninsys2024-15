@@ -17,6 +17,9 @@ def main():
     cursor.execute('INSERT INTO books (id, name) VALUES (?, ?)', (2334, "線形代数入門"))
     cursor.execute('INSERT INTO books (id, name) VALUES (?, ?)', (2558, "解析入門"))
     cursor.execute('INSERT INTO books (id, name) VALUES (?, ?)', (2953, "And then there were none"))
+    cursor.execute('INSERT INTO books (id, name) VALUES (?, ?)', (9999, "解析力学"))
+    cursor.execute('INSERT INTO books (id, name) VALUES (?, ?)', (1999, "憎悪の依頼"))
+    
 
     # 変更を保存
     conn.commit()

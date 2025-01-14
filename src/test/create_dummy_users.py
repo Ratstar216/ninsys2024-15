@@ -18,6 +18,7 @@ def main():
     cursor.execute('INSERT INTO users (id, name, age) VALUES (?, ?, ?)', (1234, "Alice", 30))
     cursor.execute('INSERT INTO users (id, name, age) VALUES (?, ?, ?)', (1678, "Bob", 25))
     cursor.execute('INSERT INTO users (id, name, age) VALUES (?, ?, ?)', (1999, "Charlie", 100))
+    cursor.execute('INSERT INTO users (id, name, age) VALUES (?, ?, ?)', (2357, "Gandalf", 1000))
 
     # 変更を保存
     conn.commit()
