@@ -4,6 +4,8 @@ import japanize_matplotlib
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import sqlite3
+from gemini import ask_gemini
+from get_functions import get_book_name
 
 def show_history(book_id):
     """
@@ -75,6 +77,9 @@ def show_history(book_id):
     ax.set_title(f"History of Book ID: {book_id}, TITLE: {book_name}")
     
     st.pyplot(fig)
+    r = ask_gemini(get_book_name(book_id), rows)
+    st.write("説明")
+    st.write(r)
 
 def main():
     st.title("書籍の履歴マップ表示アプリ")
