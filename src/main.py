@@ -1,4 +1,4 @@
-from read_qrcode_streamlit import read_qr_from_camera
+from read_qrcode import read_qr_from_camera
 from show_history import show_history
 from register import register
 
